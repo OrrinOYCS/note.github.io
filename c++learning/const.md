@@ -101,3 +101,32 @@ std::cout<<*a<<std::endl;//100
 - 承诺某些东西将是不变的
 # mutable关键字
 - 两种使用情况
+>使用情况1：在const修饰的函数中使用
+> ```cfgrlanguage
+>   class Entity{
+>   private:
+>       std::string name;
+>       //在这里用mutable修饰变量，可以让该变量被允许在const常量函数中调用是被允许修改修改
+>       mutable int count = 0;
+>   public:
+>       //这个函数返回的是const string型的引用，这里用引用是让直接访问name位置，避免了不必要的数据复制
+>       //第一个const 作用域函数的返回类型，表示返回的是一个常量引用
+>       //第二个const 表明该函数整体是一个常量成员函数，不可修改调用对象状态（mutable对应的就是解决这个const的限制）
+>       const std::string& getName() const{
+>           //我们想让count变量在const修饰的函数中可以被修改，要将count定义时候用mutable修饰
+>           count++;
+>           return name;
+>       }
+>   }
+>```
+
+>使用情况2: lambda函数中使用
+>```
+>int x = 8;
+>auto f = [=]() mutable{
+>   x++;
+>   std::cout<< x << std::endl;
+>}
+>>```
+
+ 
