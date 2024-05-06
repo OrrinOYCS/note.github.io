@@ -55,7 +55,7 @@ std::cout<<*a<<std::endl;//100
 > std::cout<<*a<<std::endl;//100
 >``` 
 
->如果我们写`const int const* a = new int`两个const表示既不希望修改地址，也不希望修改地址指向的内容
+>如果我们写`const int* const a = new int`两个const表示既不希望修改地址，也不希望修改地址指向的内容
 
 >使用方法3：在class的方法中使用const
 > getter、setter方法中多用在getter
